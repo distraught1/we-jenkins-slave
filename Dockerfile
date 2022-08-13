@@ -1,6 +1,7 @@
 FROM jenkins/jnlp-agent-maven:jdk11
 
 USER root
+RUN add-apt-repository ppa:openjdk/ppa
 RUN apt-get update --allow-releaseinfo-change && apt-get install -y \
 	apt-transport-https \
 	ca-certificates \
