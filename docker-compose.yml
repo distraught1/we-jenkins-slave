@@ -1,0 +1,8 @@
+version: '3.2'
+services:
+  slave:
+    image: distraught1/we-jenkins-slave
+    build: .
+    container_name: we-jenkins-slave
+    command: -url <url> <secret> <node-name>
+    privileged: true
