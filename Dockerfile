@@ -1,4 +1,13 @@
+FROM maven:3.6.3-jdk-8 as mavensrc
+
 FROM jenkins/inbound-agent:latest-jdk8
+
+COPY --from=mavensrc /usr/share/maven /usr/share/maven
+COPY --from=mavensrc /usr/local/bin/mvn-entrypoint.sh /usr/local/bin/mvn-entrypoint.sh
+
+ENV MAVEN_HOME /usr/share/maven
+ENV MAVEN_CONFIG "${HOME}/.m2"
+ENV PATH "${MAVEN_HOME}/bin:${PATH}"
 
 USER root
 RUN apt-get update && apt-get install -y \
