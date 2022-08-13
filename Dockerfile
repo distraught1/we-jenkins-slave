@@ -1,6 +1,6 @@
-FROM maven:3-jdk-8 as mavensrc
+FROM maven:3-jdk-11 as mavensrc
 
-FROM jenkins/inbound-agent:latest-jdk8
+FROM jenkins/inbound-agent:latest-jdk11
 
 COPY --from=mavensrc /usr/share/maven /usr/share/maven
 COPY --from=mavensrc /usr/local/bin/mvn-entrypoint.sh /usr/local/bin/mvn-entrypoint.sh
