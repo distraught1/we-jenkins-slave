@@ -4,13 +4,15 @@ USER root
 RUN apt-get update --allow-releaseinfo-change && apt-get install -y \
 	apt-transport-https \
 	ca-certificates \
-	wget \
+	curl \
 	gnupg \
 	maven \
+	--no-install-recommends \
+	&& curl -sSL https://dl.google.com/linux/linux_signing_key.pub | apt-key add - \
+	&& echo "deb https://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list \
+	&& apt-get update --allow-releaseinfo-change && apt-get install -y \
+	google-chrome-stable \
 	--no-install-recommends
-RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb \
-	&& apt install ./google-chrome-stable_current_amd64.deb \
-	&& rm ./google-chrome-stable_current_amd64.deb
 
 ENV CHROME_BIN='/usr/bin/google-chrome-stable'
 ENV MAVEN_HOME='/usr/share/maven'
