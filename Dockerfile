@@ -1,13 +1,4 @@
-FROM maven:3-jdk-11 as mavensrc
-
 FROM jenkins/inbound-agent:latest-jdk11
-
-COPY --from=mavensrc /usr/share/maven /usr/share/maven
-COPY --from=mavensrc /usr/local/bin/mvn-entrypoint.sh /usr/local/bin/mvn-entrypoint.sh
-
-ENV MAVEN_HOME /usr/share/maven
-ENV MAVEN_CONFIG "${HOME}/.m2"
-ENV PATH "${MAVEN_HOME}/bin:${PATH}"
 
 USER root
 RUN apt-get update --allow-releaseinfo-change && apt-get install -y \
@@ -15,13 +6,18 @@ RUN apt-get update --allow-releaseinfo-change && apt-get install -y \
 	ca-certificates \
 	curl \
 	gnupg \
+	maven \
 	--no-install-recommends \
 	&& curl -sSL https://dl.google.com/linux/linux_signing_key.pub | apt-key add - \
 	&& echo "deb https://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list \
 	&& apt-get update --allow-releaseinfo-change && apt-get install -y \
 	google-chrome-stable \
 	--no-install-recommends
+
 ENV CHROME_BIN='/usr/bin/google-chrome-stable'
+ENV MAVEN_HOME='/usr/share/maven'
+ENV MAVEN_CONFIG="${HOME}/.m2"
+ENV PATH="${MAVEN_HOME}/bin:${PATH}"
 
 RUN adduser jenkins
 USER jenkins
