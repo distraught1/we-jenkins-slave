@@ -1,4 +1,4 @@
-FROM maven:3.6.3-jdk-8 as mavensrc
+FROM maven:3-jdk-8 as mavensrc
 
 FROM jenkins/inbound-agent:latest-jdk8
 
