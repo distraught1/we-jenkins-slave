@@ -19,5 +19,4 @@ ENV MAVEN_HOME='/usr/share/maven'
 ENV MAVEN_CONFIG="${HOME}/.m2"
 ENV PATH="${MAVEN_HOME}/bin:${PATH}"
 
-RUN adduser jenkins
 USER jenkins
