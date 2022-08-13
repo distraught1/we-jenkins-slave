@@ -12,6 +12,6 @@ RUN apt-get update --allow-releaseinfo-change && apt-get install -y \
 	&& apt-get update --allow-releaseinfo-change && apt-get install -y \
 	google-chrome-stable \
 	--no-install-recommends
-RUN groupadd -r jenkins && adduser jenkins
+RUN adduser jenkins
 ENV CHROME_BIN='/usr/bin/google-chrome-stable'
 USER jenkins
