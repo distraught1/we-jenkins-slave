@@ -7,7 +7,3 @@ services:
     command: -url <url> <secret> <node-name>
     privileged: true
     platform: linux/x86_64
-  web:
-    platform: linux/x86_64
-  worker:
-    platform: linux/x86_64
