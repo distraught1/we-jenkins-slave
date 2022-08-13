@@ -13,10 +13,12 @@ RUN apt-get update --allow-releaseinfo-change && apt-get install -y \
 	&& apt-get update --allow-releaseinfo-change && apt-get install -y \
 	google-chrome-stable \
 	--no-install-recommends
+RUN /bin/sh -c CHROMEDRIVER_VERSION=`curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE` &&     mkdir -p /opt/chromedriver-$CHROMEDRIVER_VERSION &&     curl -sS -o /tmp/chromedriver_linux64.zip http://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip &&     unzip -qq /tmp/chromedriver_linux64.zip -d /opt/chromedriver-$CHROMEDRIVER_VERSION &&     rm /tmp/chromedriver_linux64.zip &&     chmod +x /opt/chromedriver-$CHROMEDRIVER_VERSION/chromedriver &&     ln -fs /opt/chromedriver-$CHROMEDRIVER_VERSION/chromedriver /usr/bin/chromedriver
 
 ENV CHROME_BIN='/usr/bin/google-chrome-stable'
+ENV CHROME_DRIVER='/usr/bin/chromedriver'
 ENV MAVEN_HOME='/usr/share/maven'
 ENV MAVEN_CONFIG="${HOME}/.m2"
-ENV PATH="${MAVEN_HOME}/bin:${PATH}"
+ENV PATH="/usr/bin:${MAVEN_HOME}/bin:${PATH}"
 
 #USER jenkins
