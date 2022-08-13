@@ -1,4 +1,4 @@
-FROM jenkins/inbound-agent:latest-jdk11
+FROM jenkins/jnlp-slave:latest-jdk11
 
 USER root
 RUN apt-get update --allow-releaseinfo-change && apt-get install -y \
