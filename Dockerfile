@@ -14,7 +14,13 @@ RUN apt-get update --allow-releaseinfo-change && apt-get install -y \
 	google-chrome-stable \
 	--no-install-recommends
 RUN apt-get install -y unzip
-RUN /bin/sh -c CHROMEDRIVER_VERSION=`curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE` &&     mkdir -p /opt/chromedriver-$CHROMEDRIVER_VERSION &&     curl -sS -o /tmp/chromedriver_linux64.zip https://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip &&     unzip /tmp/chromedriver_linux64.zip -d /opt/chromedriver-$CHROMEDRIVER_VERSION &&     rm /tmp/chromedriver_linux64.zip &&     chmod +x /opt/chromedriver-$CHROMEDRIVER_VERSION/chromedriver &&     ln -fs /opt/chromedriver-$CHROMEDRIVER_VERSION/chromedriver /usr/bin/chromedriver
+RUN /bin/sh -c CHROMEDRIVER_VERSION=`curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE`
+RUN mkdir -p /opt/chromedriver-$CHROMEDRIVER_VERSION
+RUN curl -sS -o /tmp/chromedriver_linux64.zip https://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip
+RUN unzip /tmp/chromedriver_linux64.zip -d /opt/chromedriver-$CHROMEDRIVER_VERSION
+RUN rm /tmp/chromedriver_linux64.zip
+RUN chmod +x /opt/chromedriver-$CHROMEDRIVER_VERSION/chromedriver
+RUN ln -fs /opt/chromedriver-$CHROMEDRIVER_VERSION/chromedriver /usr/bin/chromedriver
 
 ENV CHROME_BIN='/usr/bin/google-chrome-stable'
 ENV CHROME_DRIVER='/usr/bin/chromedriver'
