@@ -1,6 +1,6 @@
-FROM maven:3-jdk-11 as mavensrc
+FROM maven:3-jdk-8 as mavensrc
 
-FROM jenkins/inbound-agent:latest-jdk11
+FROM jenkins/jnlp-agent-jdk8
 
 COPY --from=mavensrc /usr/share/maven /usr/share/maven
 COPY --from=mavensrc /usr/local/bin/mvn-entrypoint.sh /usr/local/bin/mvn-entrypoint.sh
@@ -17,7 +17,7 @@ RUN apt-get update && apt-get install -y \
 	gnupg \
 	--no-install-recommends \
 	&& curl -sSL https://dl.google.com/linux/linux_signing_key.pub | apt-key add - \
-	&& echo "deb [arch=amd64] https://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google.list \
+	&& echo "deb https://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list \
 	&& apt-get update && apt-get install -y \
 	google-chrome-stable
 
