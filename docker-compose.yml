@@ -6,4 +6,3 @@ services:
     container_name: we-jenkins-slave
     command: -url <url> <secret> <node-name>
     privileged: true
-    platform: linux/x86_64
