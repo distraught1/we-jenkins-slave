@@ -6,7 +6,7 @@ RUN apt-get update --allow-releaseinfo-change && apt-get install -y \
 	ca-certificates \
 	curl \
 	gnupg \
-	--no-install-recommends
+	--no-install-recommends \
 	&& curl -sSL https://dl.google.com/linux/linux_signing_key.pub | apt-key add - \
 	&& echo "deb https://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list \
 	&& apt-get update --allow-releaseinfo-change && apt-get install -y \
